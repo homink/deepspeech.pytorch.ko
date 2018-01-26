@@ -22,6 +22,6 @@ python train.py --train-manifest data/nikl_train_manifest.csv --val-manifest dat
 ## Prediction
 ```
 python transcribe.py --model-path models/deepspeech_1.pth.tar \
-                     --audio-path /DATA/speech-data/NIKL_2007/fv01/fv01_t01_s01.wav > trans.log
+                     --audio-path $HOME/NIKL/fv01/fv01_t01_s01.wav > trans.log
 echo -e """$(cat trans.log | cut -d':' -f3 | cut -d'"' -f2)"""
 ```
