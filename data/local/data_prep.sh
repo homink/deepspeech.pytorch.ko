@@ -46,10 +46,6 @@ if [ $stage -le 0 ]; then
   echo "test wav $(wc -l $data/wav.test.lst) will be processed"
 fi
 
-#nikl_dataset/train/nikl/wav
-#nikl_dataset/train/nikl/txt
-#nikl_dataset/test/nikl/wav
-#nikl_dataset/test/nikl/wav
 if [ $stage -le 1 ]; then
   for x in test train;do
     mkdir -p $data/$x/nikl/wav
@@ -63,28 +59,3 @@ if [ $stage -le 1 ]; then
     done
   done
 fi
-
-exit
-
-if [ $stage -le 1 ]; then
-  mkdir -p $data/train
-  mkdir -p $data/test
-  rm -f $data/*/wav.scp
-  rm -f $data/*/text
-  rm -f $data/*/utt2spk
-  rm -f $data/*/spk2utt
-
-  for x in test train;do
-    cat data/wav.$x.lst | cut -d'/' -f7 | sed 's/.wav//g' > $data/uid.$x.lst
-    cat data/wav.$x.lst | cut -d'/' -f6 > $data/spk.$x.lst
-    paste $data/uid.$x.lst $data/wav.$x.lst | awk '{print $1" "$2}' > $data/$x/wav.scp || exit 1
-    paste $data/uid.$x.lst $data/spk.$x.lst | awk '{print $1" "$2}' > $data/$x/utt2spk || exit 1
-    cat $data/$x/utt2spk | utils/utt2spk_to_spk2utt.pl > $data/$x/spk2utt || exit 1;
-    cat $data/uid.$x.lst | while read uid;do
-      transid=$(cut -d'_' -f2-3 <<< $uid)
-      spkid=$(cut -d'_' -f1 <<< $uid)
-      echo $spkid"_"$(grep $transid $data/trans.txt) >> $data/$x/text
-    done
-  done
-fi
-
