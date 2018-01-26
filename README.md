@@ -24,4 +24,11 @@ python train.py --train-manifest data/nikl_train_manifest.csv --val-manifest dat
 python transcribe.py --model-path models/deepspeech_1.pth.tar \
                      --audio-path $HOME/NIKL/fv01/fv01_t01_s01.wav > trans.log
 echo -e """$(cat trans.log | cut -d':' -f3 | cut -d'"' -f2)"""
+> 직차도 점기도 없었다
+
+python transcribe.py --model-path models/deepspeech_2.pth.tar \
+                     --audio-path $HOME/NIKL/fv01/fv01_t01_s01.wav > trans.log
+echo -e """$(cat trans.log | cut -d':' -f3 | cut -d'"' -f2)"""
+> 기차도 전기도 없었다
+
 ```
