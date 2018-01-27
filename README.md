@@ -12,7 +12,7 @@ https://ithub.korean.go.kr/user/corpus/referenceManager.do
 
 ## Data preparation
 ```
-python nikl.py
+python ./data/nikl.py
 ```
 
 ## Training
