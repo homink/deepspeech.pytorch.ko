@@ -1,5 +1,6 @@
 import os
 import subprocess
+import codecs
 from tempfile import NamedTemporaryFile
 from torch.utils.data.sampler import Sampler
 
@@ -158,7 +159,7 @@ class SpectrogramDataset(Dataset, SpectrogramParser):
         return spect, transcript
 
     def parse_transcript(self, transcript_path):
-        with open(transcript_path, 'r') as transcript_file:
+        with codecs.open(transcript_path, 'r',encoding='utf-8') as transcript_file:
             transcript = transcript_file.read().replace('\n', '')
         transcript = list(filter(None, [self.labels_map.get(x) for x in list(transcript)]))
         return transcript
