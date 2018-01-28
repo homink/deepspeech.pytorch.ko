@@ -3,6 +3,7 @@ import errno
 import json
 import os
 import time
+import codecs
 
 import torch
 from tqdm import tqdm
@@ -183,7 +184,7 @@ if __name__ == '__main__':
                     }
                     tensorboard_writer.add_scalars(args.id, values, i + 1)
     else:
-        with open(args.labels_path) as label_file:
+        with codecs.open(args.labels_path,'r',encoding='utf-8') as label_file:
             labels = str(''.join(json.load(label_file)))
 
         audio_conf = dict(sample_rate=args.sample_rate,
@@ -331,8 +332,12 @@ if __name__ == '__main__':
             wer, cer = 0, 0
             for x in range(len(target_strings)):
                 transcript, reference = decoded_output[x][0], target_strings[x][0]
-                wer += decoder.wer(transcript, reference) / float(len(reference.split()))
-                cer += decoder.cer(transcript, reference) / float(len(reference))
+                if transcript.strip():
+                    wer += decoder.wer(transcript, reference) / float(len(reference.split()))
+                    cer += decoder.cer(transcript, reference) / float(len(reference))
+                else:
+                    wer += 100.0
+                    cer += 100.0
             total_cer += cer
             total_wer += wer
 
