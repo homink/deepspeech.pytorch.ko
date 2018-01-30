@@ -12,12 +12,16 @@ https://ithub.korean.go.kr/user/corpus/referenceManager.do
 
 ## Data preparation
 ```
-python ./data/nikl.py
+cd data
+python nikl.py
+cd ..
 ```
 
 ## Training
 ```
-python train.py --train-manifest data/nikl_train_manifest.csv --val-manifest data/nikl_val_manifest.csv
+python train.py --train-manifest data/nikl_train_manifest.csv \
+                --val-manifest data/nikl_val_manifest.csv \
+                --cuda --save-folder nikl_models/
 ```
 ## Prediction
 ```
