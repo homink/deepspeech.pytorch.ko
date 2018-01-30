@@ -18,7 +18,8 @@ args = parser.parse_args()
 
 
 def main():
-    os.makedirs(args.target_dir)
+    if not os.path.isdir(args.target_dir):
+      os.makedirs(args.target_dir)
     train_path = args.target_dir + '/train/'
     test_path = args.target_dir + '/test/'
 
