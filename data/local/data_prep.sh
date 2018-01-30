@@ -55,7 +55,6 @@ if [ $stage -le 1 ]; then
       uid=$(echo $wavfile | cut -d'/' -f7 | sed 's/.wav//g')
       transid=$(cut -d'_' -f2-3 <<< $uid)
       grep $transid $data/trans.txt | awk '{$1=""}1' | sed 's/^[ \t]*//'g > $data/$x/nikl/txt/$uid.txt
-      break
     done
   done
 fi
