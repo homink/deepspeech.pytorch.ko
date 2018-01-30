@@ -2,7 +2,7 @@
 
 corpus=$1
 data=$2
-stage=1
+stage=0
 
 echo "$0 $@"  # Print the command line for logging
 
