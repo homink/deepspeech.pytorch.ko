@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 cat $1 | while read wavfile;do
   fname=$(basename "$wavfile")
   uid=${fname/.wav/}

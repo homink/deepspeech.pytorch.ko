@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 echo "$0 $@"  # Print the command line for logging
 
